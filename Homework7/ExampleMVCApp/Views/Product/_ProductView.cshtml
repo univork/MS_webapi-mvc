@@ -1,0 +1,14 @@
+﻿@model List<ExampleMVCApp.DTO.ProductDTO>;
+
+
+@foreach (var product in Model)
+{
+    <div class="card ml-3" style="width: 18rem;">
+        <img class="card-img-top" src="@product.ImageUrl" alt="Product image">
+        <div class="card-body">
+            <h5 class="card-title">@product.Name</h5>
+            <p class="card-text">@product.Category</p>
+            <p class="card-text">$@product.Price</p>
+        </div>
+    </div>
+}

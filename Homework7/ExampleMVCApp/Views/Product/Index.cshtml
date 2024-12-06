@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Product Page";
+}
+
+
+
+<div class="d-flex" id="product-list"></div>
+
+<script>   
+    $.get('@Url.Action("ProductList", "Product")', {id : 1}, function(content){
+        $("#product-list").html(content);
+    });
+</script>
