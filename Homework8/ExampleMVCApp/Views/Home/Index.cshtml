@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    var products = (dynamic)Model.Products;
+}
+
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" style="width: 100%; height: 500px !important;">
+        @{int i = 0; }
+        @foreach (var product in products)
+        {
+            <div class="carousel-item @(i == 0 ? "active" : "")">
+                <div class="d-flex justify-content-center" style="height: 500px;">
+                    <img class="d-block object-fit-contain" src="@product.ImageUrl" alt="Image of @product.Name">
+                </div>
+                <div class="carousel-caption d-none d-md-block text-secondary">
+                    <h1>@product.Name</h1>
+                    <p>@product.Price</p>
+                </div>
+            </div>
+            i++;
+        }
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" style="filter: invert(100%);" aria-hidden="true"></span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" style="filter: invert(100%);" aria-hidden="true"></span>
+    </a>
+</div>

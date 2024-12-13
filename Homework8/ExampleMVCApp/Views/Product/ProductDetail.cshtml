@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Product Page";
+}
+@model ExampleMVCApp.DTO.ProductReadDTO;
+
+<div class="container">
+    <div class="d-flex justify-content-between">
+        <div class="p-2">
+            <img class="card-img-top" src="@Model.ImageUrl" alt="Product image">
+        </div>
+        <div class="p-2 w-75">
+            <h1>@Model.Name</h1>
+            <h3>$@Model.Price</h3>
+            <h2>@Model.Category.Name</h2>
+        </div>
+    </div>
+</div>

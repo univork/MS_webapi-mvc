@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Product Page";
+}
+
+<h4>@ViewBag.Message</h4>
+<div class="d-flex" id="product-list"></div>
+
+<script>   
+    console.log($("a")[0].text);
+    $.get('@Url.Action("ProductList", "Product")', {id : 1}, function(content){
+        $("#product-list").html(content);
+    });
+</script>
