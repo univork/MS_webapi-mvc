@@ -1,5 +1,6 @@
 ﻿using ExampleMVCApp.DTO;
 using ExampleMVCApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,20 +15,19 @@ namespace ExampleMVCApp.Controllers
         }
         public IActionResult ProductList()
         {
-            using(EstoreContext context = new EstoreContext())
+            using (EstoreContext context = new EstoreContext())
             {
                 var products = context.Products.Select(p => new ProductReadDTO
                 {
                     Id = p.Id,
                     Name = p.Name,
-                    Category = new CategoryDTO { Id = (int)p.CategoryId, Name=p.Category.Name },
+                    Category = new CategoryDTO { Id = (int)p.CategoryId, Name = p.Category.Name },
                     Price = p.Price,
                     ImageUrl = p.ImageUrl
                 }).ToList();
 
                 return PartialView(@"~/Views/Product/_ProductView.cshtml", products);
             }
-
         }
 
         public async Task<ActionResult<ProductReadDTO>> ProductDetail(int id)
@@ -50,6 +50,11 @@ namespace ExampleMVCApp.Controllers
             };
 
             return View(productDTO);
+        }
+
+        [Authorize(Policy = "AdminOnly")]
+        public IActionResult CreateProduct() {
+            return Redirect("~/Product/Index");
         }
     }
 }

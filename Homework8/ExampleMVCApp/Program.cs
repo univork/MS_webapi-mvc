@@ -5,6 +5,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddAuthentication("CookieAuth").AddCookie("CookieAuth", config =>
+{
+    config.Cookie.Name = "User.Login.Cookie";
+    config.LoginPath = "/Account/Login";
+});
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy("AdminOnly", policy => policy.RequireClaim("role", "Admin"));
 // builder.Services.AddDbContext<EstoreContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("EstoreCon")));
 
 var app = builder.Build();
@@ -18,6 +25,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
