@@ -1,5 +1,6 @@
 ﻿using ExampleMVCApp.DTO;
 using ExampleMVCApp.Models;
+using ExampleMVCApp.Util;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,39 +15,17 @@ namespace ExampleMVCApp.Controllers
 
         public IActionResult ProductList()
         {
-            using(EstoreContext context = new EstoreContext())
-            {
-                var products = context.Products.Select(p => new ProductReadDTO
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Category = new CategoryDTO { Name = p.Category.Name },
-                    Price = p.Price,
-                    ImageUrl = p.ImageUrl
-                }).ToList();
-
-                return PartialView(@"~/Views/Product/_ProductView.cshtml", products);
-            }
+            List<ProductReadDTO>products = DBUtils.ReadAllProducts();
+            return PartialView(@"~/Views/Product/_ProductView.cshtml", products);
         }
         
         public IActionResult ProductDetails(int id)
         {
-            using EstoreContext _context = new();
-            var product = _context.Products.Include("Category").FirstOrDefault(p => p.Id == id);
-
-            if (product == null)
+            var productDTO = DBUtils.GetProductDetails(id);
+            if (productDTO == null)
             {
                 return NotFound();
             }
-
-            ProductDTO productDTO = new ProductReadDTO
-            {
-                Id = product.Id,
-                Name = product.Name,
-                Price = product.Price,
-                Category = new CategoryDTO { Name = product.Category.Name },
-                ImageUrl = product.ImageUrl,
-            };
 
             return View(productDTO);
         }
@@ -77,6 +56,49 @@ namespace ExampleMVCApp.Controllers
                 return RedirectToAction("Index");
             }
             return View(productDTO);
+        }
+
+        public IActionResult UpdateProduct(int id)
+        {
+            using EstoreContext _context = new();
+            var product = _context.Products.Include("Category").FirstOrDefault(p => p.Id == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            ProductDTO productDTO = new ProductUpdateDTO
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                ImageUrl = product.ImageUrl,
+                StockQuantity = product.StockQuantity
+            };
+            return View(productDTO);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateProduct(int id, ProductUpdateDTO productDTO) {
+            if (!ModelState.IsValid) { 
+                return View(productDTO);
+            }
+
+            using EstoreContext context = new EstoreContext();
+            var product = context.Products.FirstOrDefault(p => p.Id == id);
+            if (product == null) {
+                return NotFound();
+            }
+
+            product.Name = productDTO.Name;
+            product.Price = productDTO.Price;
+            product.StockQuantity = productDTO.StockQuantity;
+            product.ImageUrl = productDTO.ImageUrl;
+
+            context.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

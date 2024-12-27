@@ -6,10 +6,15 @@ namespace ExampleMVCApp.DTO
     {
         [Required]
         public string Name { get; set; }
-        [Range(0, double.MaxValue)]
+
+        [Required]
+        [Range(0, 20000)]
         public decimal? Price { get; set; }
-        [Range(0, int.MaxValue)]
+
+        [Required]
+        [Range(0, 500)]
         public int? StockQuantity { get; set; }
+
         [StringLength(200)]
         public string? ImageUrl { get; set; }
     }

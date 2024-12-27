@@ -1,26 +1,15 @@
-﻿@model ExampleMVCApp.DTO.ProductCreateDTO;
+﻿@model ExampleMVCApp.DTO.ProductUpdateDTO;
 
 @{
     ViewData["Title"] = "Product Page";
 }
 
 
-<form asp-controller="Product" asp-action="CreateProduct" method="post">
+<form asp-controller="Product" asp-action="UpdateProduct" method="post">
     <div>
         @Html.LabelFor(m => m.Name)
         @Html.TextBoxFor(m => m.Name, new {@class = "form-control"})
-        <span class="text-danger">
-            @Html.ValidationMessageFor(m => m.Name)
-        </span>
-    </div>
-    <br />
-
-    <div>
-        @Html.LabelFor(m => m.CategoryId)
-        @Html.TextBoxFor(m => m.CategoryId, new {@class = "form-control"})
-        <span class="text-danger">
-            @Html.ValidationMessageFor(m => m.CategoryId)
-        </span>
+        @Html.ValidationMessageFor(m => m.Name)
     </div>
     <br />
 
@@ -50,7 +39,6 @@
         </span>
     </div>
     <br />
-
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
 
