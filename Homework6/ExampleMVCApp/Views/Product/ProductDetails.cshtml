@@ -1,0 +1,12 @@
+﻿@model ExampleMVCApp.DTO.ProductReadDTO;
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<h1>@Model.Name</h1>
+<img src="@Model.ImageUrl" alt="Alternate Text" height="200"/>
+<p>@Model.Category.Name</p>
+<p>@Model.Price</p>
+<p>@Model.StockQuantity items in stock</p>
+
+

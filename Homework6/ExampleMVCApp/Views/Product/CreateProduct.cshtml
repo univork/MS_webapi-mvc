@@ -1,0 +1,41 @@
+﻿@model ExampleMVCApp.DTO.ProductCreateDTO;
+
+@{
+    ViewData["Title"] = "Product Page";
+}
+
+
+<form asp-controller="Product" asp-action="CreateProduct" method="post">
+    <div>
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.CategoryId)
+        @Html.TextBoxFor(m => m.CategoryId, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.CategoryId)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Price)
+        @Html.TextBoxFor(m => m.Price, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.Price)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.ImageUrl)
+        @Html.TextBoxFor(m => m.ImageUrl, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.ImageUrl)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.StockQuantity)
+        @Html.TextBoxFor(m => m.StockQuantity, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.StockQuantity)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
