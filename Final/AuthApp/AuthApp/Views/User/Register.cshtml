@@ -1,0 +1,79 @@
+﻿@model UserCreateViewModel;
+@{
+    ViewData["Title"] = "Register";
+    ViewData["HideNav"] = true;
+}
+
+<form asp-controller="User" asp-action="Register" method="POST" class="form-container">
+    <div class="sign-up">
+        <h1 class="heading">Hello, friend!</h1>
+
+        <div class="text">
+            <img src="https://i.postimg.cc/1zgS8WTF/user.png" alt="icon" height="20">
+            @Html.TextBoxFor(m => m.FirstName, new {@type = "text", @placeholder = "First Name"})
+            <span class="text-danger">
+                @Html.ValidationMessageFor(m => m.FirstName)
+            </span>
+        </div>
+
+        <div class="text">
+            <img src="https://i.postimg.cc/1zgS8WTF/user.png" alt="icon" height="20">
+            @Html.TextBoxFor(m => m.LastName, new {@type = "text", @placeholder = "Last Name"})
+            <span class="text-danger">
+                @Html.ValidationMessageFor(m => m.LastName)
+            </span>
+        </div>
+
+        <div class="text">
+            <img src="https://i.postimg.cc/1zgS8WTF/user.png" alt="icon" height="20">
+            @Html.TextBoxFor(m => m.PersonalNumber, new {@type = "text", @placeholder = "Personal Number"})
+            <span class="text-danger">
+                @Html.ValidationMessageFor(m => m.PersonalNumber)
+            </span>
+        </div>
+
+        <div class="text">
+            <img src="https://i.postimg.cc/1zgS8WTF/user.png" alt="icon" height="20">
+            @Html.TextBoxFor(m => m.Phone, new {@type = "text", @placeholder = "Phone"})
+            <span class="text-danger">
+                @Html.ValidationMessageFor(m => m.Phone)
+            </span>
+        </div>
+
+        <div class="text">
+            <img src="https://i.postimg.cc/DZBPRgvC/email.png" alt="icon" height="12">
+            @Html.TextBoxFor(m => m.Email, new {@type = "email", @placeholder = "Email"})
+            <span class="text-danger">
+                @Html.ValidationMessageFor(m => m.Email)
+            </span>
+        </div>
+
+        <div class="text">
+            <img src="https://i.postimg.cc/Nj5SDK4q/password.png" alt="icon" height="20">
+            @Html.TextBoxFor(m => m.Password, new {@type = "password", @placeholder = "Password"})
+            <span class="text-danger">
+                @Html.ValidationMessageFor(m => m.Password)
+            </span>
+        </div>
+
+        <div class="text">
+            <img src="https://i.postimg.cc/Nj5SDK4q/password.png" alt="icon" height="20">
+            @Html.TextBoxFor(m => m.ConfirmPassword, new {@type = "password", @placeholder = "Confirm Password"})
+            <span class="text-danger">
+                @Html.ValidationMessageFor(m => m.ConfirmPassword)
+            </span>
+        </div>
+
+        <button type="submit">REGISTER</button>
+        <p class="conditions">
+            Already have an account?
+            <a asp-controller="User" asp-action="Login">Login</a>
+        </p>
+
+    </div>
+
+    <div class="text-container">
+        <h1>Glad to see you!</h1>
+        <p>Welcome, please fill in the blanks for registration</p>
+    </div>
+</form>

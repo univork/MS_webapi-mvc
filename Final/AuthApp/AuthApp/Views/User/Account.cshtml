@@ -1,0 +1,25 @@
+﻿@model UserReadViewModel;
+@{
+    ViewData["Title"] = "Account";
+}
+
+<section class="profile">
+    <div class="header">
+        <div class="details">
+            <img src="@("https://robohash.org/" + @Model.FirstName + ".png")" class="profile-pic">
+            <h1 class="heading">@Model.FirstName @Model.LastName</h1>
+            <div class="location">
+                <i class="fas fa-envelope"></i>
+                <p>@Model.Email</p>
+            </div>
+            <div class="location">
+                <i class="fas fa-phone"></i>
+                <p>@Model.Phone</p>
+            </div>
+            <div class="location">
+                <i class="fas fa-user"></i>
+                <p>@Model.PersonalNumber</p>
+            </div>
+        </div>
+    </div>
+</section>
